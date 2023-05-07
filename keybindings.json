@@ -1,0 +1,251 @@
+//My keybinds:
+
+//arrow keys: navigate
+//alt+arrow: navigate 5x
+//ctrl+left or right: navigate word
+//shift+alt+up or down: move line up/down
+//shift+alt+left or right: navigate back/forward
+//ctrl+[ or ]: trigger intellisense, next suggestion
+//shift+ctrl+[ or ]: trigger parameter hints, next suggestion
+//alt+shift+[ or ]: fold/unfold
+//end: go to end
+//home: go to start or toggle between whitespace side of start
+//ctrl+` or ctrl+shift+q: toggle terminal
+//ctrl+shift+v: go to explorer
+//ctrl+enter: replace all
+//ctrl+t :find symbol
+//ctrl+e enter: go to editor
+//ctrl+p enter command
+//> :line : go to line
+//> :line:char : go to line and char
+//ctrl+c: copy selection or line / abort
+//ctrl+v: paste
+//ctrl+x: cut selection or line
+//ctrl+shift+k / shift+delete: delete line
+//ctrl+space: show hover
+//ctrl+shift+space: show context menu
+//ctrl+s: save
+//ctrl+f: find
+//ctrl+shift+f: find in files
+//ctrl+h: replace
+//tab: navigate menu
+//f2: rename
+//f12: go to definition
+//alt+f12: peek definition
+//alt+c: match whole word
+//alt+r: match regex
+//alt+l search in selection
+
+//never touch the mouse
+
+
+[{
+    "key": "ctrl+]",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key" : "ctrl+]",
+    "command" : "editor.action.triggerSuggest",
+    "when" : "editorTextFocus && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+]",
+    "command": "-editor.action.indentLines",
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "editor.action.replaceAll",
+    "when": "findWidgetVisible || replaceActive",
+  },
+  {
+    "key": "ctrl+]",
+    "command": "editor.action.nextMatchFindAction",
+    "when": "findWidgetVisible",
+  },
+  {
+    "key": "ctrl+[",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key" : "ctrl+[",
+    "command" : "editor.action.triggerSuggest",
+    "when" : "editorTextFocus && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+[",
+    "command": "editor.action.previousMatchFindAction",
+    "when": "findWidgetVisible || replaceActive",
+  },
+  {
+    "key": "ctrl+[",
+    "command": "-editor.action.outdentLines",
+  },
+  {
+    "key": "up",
+    "command": "-showPrevParameterHint",
+  },
+  {
+    "key": "up",
+    "command": "-selectPrevSuggestion",
+  },
+  {
+    "key": "down",
+    "command": "-selectNextSuggestion",
+  },
+  {
+    "key": "down",
+    "command": "-showNextParameterHint",
+  },
+  { "key": "enter",
+    "command": "-acceptSelectedSuggestion",
+  },
+  {
+    "key":"alt+down",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "cursorDown",
+            "cursorDown",
+            "cursorDown",
+            "cursorDown",
+            "cursorDown"
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
+    "key":"alt+up",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "cursorUp",
+            "cursorUp",
+            "cursorUp",
+            "cursorUp",
+            "cursorUp"
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
+    "key": "shift+alt+down",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+up",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+left",
+    "command": "workbench.action.navigateBack",
+  },
+  {
+    "key": "shift+alt+right",
+    "command": "workbench.action.navigateForward",
+  },
+  {
+    "key":"alt+right",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "cursorRight",
+            "cursorRight",
+            "cursorRight",
+            "cursorRight",
+            "cursorRight"
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
+    "key":"alt+left",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "cursorLeft",
+            "cursorLeft",
+            "cursorLeft",
+            "cursorLeft",
+            "cursorLeft"
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+]",
+    "command": "pylance.triggerParameterHints",
+    "when": "!parameterHintsVisible"
+  },
+  {
+    "key": "ctrl+shift+]",
+    "command": "showNextParameterHint",
+    "when": "parameterHintsVisible"
+  },
+  {
+    "key": "ctrl+shift+[",
+    "command": "pylance.triggerParameterHints",
+    "when": "!parameterHintsVisible"
+  },
+  {
+    "key": "ctrl+shift+[",
+    "command": "showPrevParameterHint",
+    "when": "parameterHintsVisible"
+  },
+  {
+    "key": "alt+shift+]",
+    "command": "editor.unfold",
+  },
+  {
+    "key": "alt+shift+[",
+    "command": "editor.fold",
+  },
+  {
+    "key" : "escape",
+    "command": "removeSecondaryCursors",
+    "when": "editorHasMultipleSelections"
+  },
+  {
+    "key": "tab",
+    "command": "-acceptSelectedSuggestion",
+    "when": "suggestWidgetVisible"   
+  },
+  {
+    "key": "ctrl+space",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+space",
+    "command": "editor.action.showContextMenu",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+]",
+    "command": "editor.action.indentLines",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+[",
+    "command": "editor.action.outdentLines",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "editor.action.showHover"
+  },
+  {
+    "key": "ctrl+shift+q",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+shift+v",
+    "command": "workbench.view.explorer"
+  },
+  { "key": "ctrl+p",
+    "command": "workbench.action.showCommands"
+  },
+]
