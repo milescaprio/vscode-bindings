@@ -1,15 +1,19 @@
 //My keybinds:
 
-//arrow keys: navigate
-//alt+arrow: navigate 5x
+//arrow keys: navigate (even when intellisense pops up!)
+//alt+arrow: navigate 5x [make sure you have the multiCommand extension installed]
+//alt+backspace: delete 5x
 //ctrl+left or right: navigate word
 //shift+alt+up or down: move line up/down
 //shift+alt+left or right: navigate back/forward
 //ctrl+[ or ]: trigger intellisense, next suggestion
+//ctrl+\: accept suggestion
 //shift+ctrl+[ or ]: trigger parameter hints, next suggestion
 //alt+shift+[ or ]: fold/unfold
 //end: go to end
 //home: go to start or toggle between whitespace side of start
+//ctrl+alt+left: home
+//ctrl+alt+right: end
 //ctrl+` or ctrl+shift+q: toggle terminal
 //ctrl+shift+v: go to explorer
 //ctrl+enter: replace all
@@ -35,6 +39,10 @@
 //alt+c: match whole word
 //alt+r: match regex
 //alt+l search in selection
+//ctrl+enter: copilot suggestion
+//ctrl+shift+enter: insert line above
+//alt+enter: insert line below
+
 
 //never touch the mouse
 
@@ -101,6 +109,9 @@
   { "key": "enter",
     "command": "-acceptSelectedSuggestion",
   },
+   {"key": "ctrl+\\",
+    "command": "acceptSelectedCodeAction",
+  },
   {
     "key":"alt+down",
     "command": "extension.multiCommand.execute",
@@ -114,7 +125,7 @@
         ]
     },
     "when":"editorTextFocus"
-  },
+},
   {
     "key":"alt+up",
     "command": "extension.multiCommand.execute",
@@ -157,6 +168,20 @@
             "cursorRight",
             "cursorRight",
             "cursorRight"
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
+    "key":"alt+backspace",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
         ]
     },
     "when":"editorTextFocus"
@@ -247,5 +272,21 @@
   },
   { "key": "ctrl+p",
     "command": "workbench.action.showCommands"
+  },
+  { "key": "alt+enter",
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus"
+  },
+  { "key": "ctrl+alt+left",
+    "command": "cursorHome",
+    "when": "editorTextFocus"
+  },
+  { "key": "ctrl+alt+right",
+    "command": "cursorEnd",
+    "when": "editorTextFocus"
+  },
+  { "key": "shift+enter",  
+    "command": "-notebook.cell.executeAndSelectBelow",
+    "when": "notebookCellListFocused && notebookCellType == 'markup' || notebookCellListFocused && notebookMissingKernelExtension && !notebookCellExecuting && notebookCellType == 'code' || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelCount > 0 || notebookCellListFocused && !notebookCellExecuting && notebookCellType == 'code' && notebookKernelSourceCount > 0"
   },
 ]
