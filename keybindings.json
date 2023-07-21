@@ -3,18 +3,21 @@
 //Install multi-command extension first for 5x navigate commands, tab-out also recommended
 
 //arrow keys: navigate (even when intellisense pops up!)
-//alt+arrow: navigate 5x
+//alt+arrow: navigate 5x [make sure you have the multiCommand extension installed]
 //pgdn pgup long scroll
 //alt+pgdn pgup: long scroll preview
 //ctrl+left or right, ctrl+r or ctrl+shift+r: navigate word
+//alt+backspace: delete 5x
 //shift+alt+up or down: move line up/down
 //shift+alt+left or right: navigate back/forward
 //ctrl+[ or ]: trigger intellisense, next suggestion
-//ctrl+\ : accept suggestion
+//ctrl+\: accept suggestion
 //shift+ctrl+[ or ]: trigger parameter hints, next suggestion
 //alt+shift+[ or ]: fold/unfold
 //end: go to end
 //home: go to start or toggle between whitespace side of start
+//ctrl+alt+left: home
+//ctrl+alt+right: end
 //ctrl+` or ctrl+shift+q: toggle terminal
 //ctrl+shift+v: go to explorer
 //ctrl+enter: replace all
@@ -129,6 +132,9 @@
   },
   { "key": "enter",
     "command": "-acceptSelectedSuggestion",
+  },
+   {"key": "ctrl+\\",
+    "command": "acceptSelectedCodeAction",
   },
   {
     "key":"alt+down",
@@ -366,15 +372,13 @@
           "editor.action.commentLine",
         ]
     },
-  }
-  // {
-  //   "key": "ctrl+shift+r",
-  //   "command": "-editor.action.refactor",
-  // },
-  // { "key": "ctrl+shift+r",          "command": "-rerunSearchEditorSearch",
-  //                                    "when": "inSearchEditor" },
-  // { "key": "ctrl+shift+r",          "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
-  //                                   "when": "inQuickOpen && inRecentFilesPicker" },
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-editor.action.refactor",
+  },
+  { "key": "ctrl+shift+r",          "command": "-rerunSearchEditorSearch", },
+  { "key": "ctrl+shift+r",          "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker", },
   // { "key": "shift+backspace", 
   //   "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
   //   "when": "!activeEditorGroupEmpty" 
