@@ -1,11 +1,16 @@
 //My keybinds:
 
-//arrow keys: navigate
+//Install multi-command extension first for 5x navigate commands, tab-out also recommended
+
+//arrow keys: navigate (even when intellisense pops up!)
 //alt+arrow: navigate 5x
-//ctrl+left or right: navigate word
+//pgdn pgup long scroll
+//alt+pgdn pgup: long scroll preview
+//ctrl+left or right, ctrl+r or ctrl+shift+r: navigate word
 //shift+alt+up or down: move line up/down
 //shift+alt+left or right: navigate back/forward
 //ctrl+[ or ]: trigger intellisense, next suggestion
+//ctrl+\ : accept suggestion
 //shift+ctrl+[ or ]: trigger parameter hints, next suggestion
 //alt+shift+[ or ]: fold/unfold
 //end: go to end
@@ -22,6 +27,7 @@
 //ctrl+v: paste
 //ctrl+x: cut selection or line
 //ctrl+shift+k / shift+delete: delete line
+//ctrl+d : select current word
 //ctrl+space: show hover
 //ctrl+shift+space: show context menu
 //ctrl+s: save
@@ -35,6 +41,24 @@
 //alt+c: match whole word
 //alt+r: match regex
 //alt+l search in selection
+//ctrl+enter: copilot suggestion
+//ctrl+shift+enter: insert line above
+//ctrl+alt+enter: insert line below
+//ctrl+alt+left: home
+//ctrl+alt+right: end
+//shift+that: select
+//ctrl+shift+=: focus on notification popup
+//shift+alt+i: insert cursor at end of each line
+//shift+alt+backspace: delete brackets
+//shift+backspace: last file
+//ctrl+u undo cursor
+//ctrl+r start of word
+//ctrl+shift+r end of word
+//ctrl+alt+r recent folders
+//ctrl+. refactor
+//ctrl+alt+k: delete above
+//ctrl+alt+j: delete below
+//ctrl+alt+[number 1-5] Clipboard multi-storage, in progress
 
 //never touch the mouse
 
@@ -52,6 +76,11 @@
   {
     "key": "ctrl+]",
     "command": "-editor.action.indentLines",
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "acceptSelectedSuggestion",
+    "when": "editorTextFocus && suggestWidgetVisible",
   },
   {
     "key": "ctrl+enter",
@@ -114,7 +143,7 @@
         ]
     },
     "when":"editorTextFocus"
-  },
+},
   {
     "key":"alt+up",
     "command": "extension.multiCommand.execute",
@@ -162,6 +191,20 @@
     "when":"editorTextFocus"
   },
   {
+    "key":"alt+backspace",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
+            "deleteLeft",
+        ]
+    },
+    "when":"editorTextFocus"
+  },
+  {
     "key":"alt+left",
     "command": "extension.multiCommand.execute",
     "args": { 
@@ -177,7 +220,7 @@
   },
   {
     "key": "ctrl+shift+]",
-    "command": "pylance.triggerParameterHints",
+    "command": "editor.action.triggerParameterHints",
     "when": "!parameterHintsVisible"
   },
   {
@@ -187,7 +230,7 @@
   },
   {
     "key": "ctrl+shift+[",
-    "command": "pylance.triggerParameterHints",
+    "command": "editor.action.triggerParameterHints",
     "when": "!parameterHintsVisible"
   },
   {
@@ -248,4 +291,106 @@
   { "key": "ctrl+p",
     "command": "workbench.action.showCommands"
   },
+  { "key": "ctrl+alt+enter",
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus"
+  },
+  { "key": "ctrl+alt+left",
+    "command": "cursorHome",
+    "when": "editorTextFocus"
+  },
+  { "key": "ctrl+alt+right",
+    "command": "cursorEnd",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+=",
+    "command": "notifications.focusToasts"
+  },
+  { "key": "shift+alt+ctrl+right",
+    "command": "cursorEndSelect",
+    "when": "textInputFocus",
+  },
+  { 
+    "key": "shift+alt+ctrl+left",
+    "command": "cursorHomeSelect",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "cursorWordLeft",
+    "when": "textInputFocus"
+  },
+  {
+    "key" : "ctrl+shift+r",
+    "command" : "cursorWordRight",
+    "when" : "textInputFocus",
+  },
+  {
+    "key": "ctrl+alt+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+          "cursorDown",
+          "editor.action.deleteLines",
+          "cursorUp",
+        ]
+    },
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+          "cursorUp",
+          "editor.action.deleteLines",
+        ]
+    },
+  },
+  { "key": "ctrl+k ctrl+shift+w",   "command": "-workbench.action.closeAllGroups" },
+  { "key": "ctrl+shift+w",          "command": "-workbench.action.closeWindow" },
+  {
+    "key": "ctrl+alt+1",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+          "editor.action.clipboardCopyAction",
+          "cursorBottom",
+          "editor.action.clipboardPasteAction",
+          "cursorUp",
+          "editor.action.moveLinesDownAction",
+          "editor.action.commentLine",
+        ]
+    },
+  }
+  // {
+  //   "key": "ctrl+shift+r",
+  //   "command": "-editor.action.refactor",
+  // },
+  // { "key": "ctrl+shift+r",          "command": "-rerunSearchEditorSearch",
+  //                                    "when": "inSearchEditor" },
+  // { "key": "ctrl+shift+r",          "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
+  //                                   "when": "inQuickOpen && inRecentFilesPicker" },
+  // { "key": "shift+backspace", 
+  //   "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+  //   "when": "!activeEditorGroupEmpty" 
+  // },
+  // { "key": "shift+backspace",
+  //   "command": "workbench.action.quickOpenNavigateNextInEditorPicker",
+  //   "when": "inEditorsPicker && inQuickOpen" 
+  // },
+  
+  // { "key": "home",
+  //   "command": "cursorHome",
+  //   "when": "textInputFocus" 
+  // },
+  // { 
+  //   "key": "shift+home",
+  //   "command": "cursorHomeSelect",
+  //   "when": "textInputFocus" 
+  // },
 ]
